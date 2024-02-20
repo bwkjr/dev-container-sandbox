@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
-const shopifyService = require('./services/shopify/getOrderById');
-const shipstationService = require('./services/shipstation/getShipmentIds');
+const shopifyService = require('./services/shopify/getOrderByID');
+const shipstationService = require('./services/shipstation/getShipmentData');
 require('dotenv').config();
+const config = require('./config');
 
 // Example route to get a specific order by ID
 app.get('/order-data/:orderId', async (req, res) => {
@@ -21,8 +22,8 @@ app.get('/order-data/:orderId', async (req, res) => {
 // Example route to get shipstation data
 app.get('/shipment-data', async (req, res) => {
   try {
-      const shipmentIds = await shipstationService.getShipmentIds();
-      res.json(shipmentIds);
+      const shipmentData = await shipstationService.getShipmentData();
+      res.json(shipmentData);
   } catch (error) {
       res.status(500).json({ error: 'Internal Server Error' });
   }
