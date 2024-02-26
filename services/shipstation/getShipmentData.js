@@ -1,6 +1,6 @@
 // Import the Axios library for making HTTP requests
 const axios = require('axios');
-
+require('dotenv').config();
 // Import configurations
 const config = require('../../config');
 const getFullfilmentOrderById = require('../shopify/getFulfillmentOrder');
@@ -93,7 +93,7 @@ const getShipmentData = async () => {
             })
 
             await getFullfilmentOrderById.getFulfillmentOrderById();
-            break;
+            break;   ///REMOVEEEEEEEEEE just here for testing
 
         }
 
