@@ -3,6 +3,8 @@
 // https://stackoverflow.com/questions/77595304/403-error-while-calling-netsuite-restlet-from-node-js  (Thank the lord for this person...)
 // Create the following suitescript in Netsuite (by Tim Dietrich)
 // https://timdietrich.me/blog/netsuite-saved-search-api/ (This dude is a legend...)
+// Some more Netsuite docs
+// https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_N2971402.html#Authentication-for-RESTlets
 
 require('dotenv').config();
 const axios = require('axios');
@@ -15,7 +17,6 @@ const CONSUMER_SECRET = process.env.CONSUMER_SECRET;
 const ACCESS_TOKEN_SECRET = process.env.TOKEN_SECRET;
 const SCRIPT_ID = '841'; // Replace with your actual script ID
 const SCRIPT_DEPLOYMENT_ID = '3'; // Replace with your actual deployment ID
-
 
 const callRestlet = async (searchID) => {
   // Base URL for NetSuite RESTlet
@@ -91,8 +92,8 @@ const callRestlet = async (searchID) => {
     console.error('Error making API call:', error.message);
     throw error;
   }
+  
 };
-
 module.exports = {
   callRestlet,
 };

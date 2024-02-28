@@ -4,7 +4,9 @@ const app = express();
 const shopifyService = require('./services/shopify/getOrderByID');
 const shipstationService = require('./services/shipstation/getShipmentData');
 const netsuiteService = require('./services/netsuite/restletRequest');
-require('dotenv').config();
+const invoiceService = require('./services/netsuite/getInvoiceIds');
+const paymentService = require('./services/netsuite/postCreatePayment');
+const gt = require('./services/netsuite/getToken');
 const config = require('./config');
 
 // Example route to get a specific order by ID
@@ -24,10 +26,10 @@ app.get('/order-data/:orderId', async (req, res) => {
 // Example route to get shipstation data
 app.get('/shipment-data', async (req, res) => {
   try {
-      const shipmentData = await shipstationService.getShipmentData();
-      res.json(shipmentData);
+    const shipmentData = await shipstationService.getShipmentData();
+    res.json(shipmentData);
   } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
@@ -42,6 +44,25 @@ app.get('/restlet', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+app.get('/payment', async (req, res) => {
+  try {
+    const searchID = 'customsearch579'; // Replace with your actual searchID
+    
+    //const test = ['2015685'];
+    // const accessToken = await gt.getToken();
+
+    // for (let i = 0; i < test.length; i++) {
+    //   const id = test[i];
+    //   const paymentResult = await paymentService.makeInvoicePayment(accessToken, id);
+    //   res.json(paymentResult);
+    // }
+  } catch (error) {
+    console.error('Error making API call: ', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 
 // Start the server
